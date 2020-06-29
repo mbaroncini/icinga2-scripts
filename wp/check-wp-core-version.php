@@ -25,7 +25,6 @@ $vv = "";
 
 
 $json = shell_exec("$wp_cli core check-update --format=json" );
-print $json;
 if ( $json )
 {
 
@@ -41,7 +40,7 @@ if ( $json )
 		foreach ( $versions as $item )
 		{
 			$type = $item['update_type'];
-			$vv .= "$type: {$item['version']}, ";
+			$vv .= "$type: {$item['version']}\n";
 
 			switch( $type ){
 				case 'minor':
@@ -52,7 +51,6 @@ if ( $json )
 				break;
 			}
 		}
-		$vv = substr($vv,0,-2);
 
 		if ($exit_code == 2 )
 		{
@@ -65,6 +63,13 @@ if ( $json )
 	}
 }
 
-print "$message\n$vv\n";
+print "$message\n";
+print "Current Version:\n";
+exec( "$wp_cli core version --extra" );
+if ( $vv )
+{
+	print "To Update:\n";
+	print "$vv\n";
+}
 exit($exit_code);
 
