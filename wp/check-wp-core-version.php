@@ -7,7 +7,13 @@ if($argc != 3) {
 }
 
 $wp_cli = $argv[1];
-chdir($argv[2]);
+$check = chdir($argv[2]);
+
+if ( ! $check )
+{
+	print "UNKNOWN - Impossible change directory in: " . $argv[2];
+	exit(3);
+}
 
 //0 OK
 //1 WARNING
