@@ -24,7 +24,7 @@ $message = "OK - This Wordpress has the last core version.";
 $vv = "";
 
 
-$json = shell_exec('wp core check-update --allow-root --format=json' );
+$json = shell_exec("$wp_cli core check-update --format=json" );
 print $json;
 if ( $json )
 {
