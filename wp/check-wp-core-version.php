@@ -11,7 +11,13 @@ $check = chdir($argv[2]);
 
 if ( ! $check )
 {
-	print "UNKNOWN - Impossible change directory in: " . $argv[2];
+	print "[UNKNOWN] - Impossible change directory in: " . $argv[2];
+	exit(3);
+}
+
+if ( ! realpath($wp_cli) )
+{
+	print "[UNKNOWN] - Impossible get wp bin in: " . $wp_cli;
 	exit(3);
 }
 
@@ -20,7 +26,7 @@ if ( ! $check )
 //2 CRITICAL
 //3 UNKNOWN
 $exit_code = 0;
-$message = "OK - This Wordpress has the last core version.";
+$message = "[OK] - This Wordpress has the last core version.";
 $vv = "";
 
 
@@ -31,7 +37,7 @@ if ( $json )
 	$versions = json_decode($json, true);
 	if ( json_last_error() !== JSON_ERROR_NONE )
 	{
-		print "UNKNOWN - An error occurred during json reading\n\n$json";
+		print "[UNKNOWN] - An error occurred during json reading\n\n$json";
 		exit(3);
 	}
 
@@ -54,22 +60,22 @@ if ( $json )
 
 		if ($exit_code == 2 )
 		{
-			$message = "CRITICAL - You have a major update to do";
+			$message = "[CRITICAL] - You have a major update to do";
 		}
 		elseif($exit_code == 1 )
 		{
-			$message = "WARNING - You have a minor update to do.";
+			$message = "[WARNING] - You have a minor update to do.";
 		}
 	}
 }
 
 print "$message\n";
-print "<b>Current Version</b>\n";
+print "Current Version\n";
 echo shell_exec( "$wp_cli core version --extra" );
 print "\n";
 if ( $vv )
 {
-	print "<b>To Update</b>\n";
+	print "To Update\n";
 	print "$vv\n";
 }
 exit($exit_code);
