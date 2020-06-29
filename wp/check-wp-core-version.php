@@ -65,7 +65,7 @@ if ( $json )
 
 print "$message\n";
 print "Current Version:\n";
-exec( "$wp_cli core version --extra" );
+echo shell_exec( "$wp_cli core version --extra" );
 if ( $vv )
 {
 	print "To Update:\n";
