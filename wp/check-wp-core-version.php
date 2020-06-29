@@ -25,6 +25,7 @@ $vv = "";
 
 
 $json = shell_exec('wp core check-update --allow-root --format=json' );
+print $json;
 if ( $json )
 {
 
