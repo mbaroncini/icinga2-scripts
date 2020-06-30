@@ -86,7 +86,7 @@ foreach ($performance_data as $key => $value)
 	$t .= "'$key'=$v ";
 }
 
-$t = strpos($t,0,-1);
+$t = substr($t,0,-1);
 
 print "{$message}|{$t}";
 print "Current Version\n";
