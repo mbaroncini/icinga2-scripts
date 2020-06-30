@@ -1,6 +1,21 @@
 #!/usr/bin/env php
 <?php
 
+function version_to_float( $v )
+{
+	$versions = explode('.',$v);
+	$i = 0;
+	$r = 0;
+	foreach ( $versions as $version )
+	{
+		$r = $r + ( $version / pow(10,$i) );
+
+		$i++;
+	}
+
+	return $r;
+}
+
 if($argc != 3) {
 	print "usage: check-wp-core-version.php <wp-cli bin path> <path to wp installation>\n";
 	exit(3);
@@ -82,8 +97,8 @@ if ( $json )
 $t = "";
 foreach ($performance_data as $key => $value)
 {
-	// $v = strtr( $value , ['.'=>'']);
-	$t .= "'$key'=$value ";
+	$v = version_to_float( $value );
+	$t .= "'$key'=$v ";
 }
 
 $t = substr($t,0,-1);
