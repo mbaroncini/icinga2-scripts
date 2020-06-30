@@ -89,10 +89,10 @@ if ( $vv )
 	print "$vv";
 }
 
-echo " | ";
+$t=" |";
 foreach ( $performance_data as $key => $value )
-	echo "$key=$value ";
-print "\n";
+	$t .=" $key=$value";
+print "$t\n";
 
 exit($exit_code);
 
