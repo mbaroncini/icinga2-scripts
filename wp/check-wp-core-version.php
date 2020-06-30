@@ -81,7 +81,7 @@ if ( $json )
 
 $t = "|";
 foreach ($performance_data as $key => $value)
-	$t .= " '$key=$value";
+	$t .= " '$key'=$value";
 
 print "{$message} {$t}\n";
 print "Current Version\n";
