@@ -30,7 +30,7 @@ $message = "[OK] - This Wordpress has the last core version.";
 $vv = "";
 
 
-$sv = shell_exec("$wp_cli core version");
+$sv = trim(shell_exec("$wp_cli core version --quiet"));
 
 $performance_data = [
 	'current' => $sv,
@@ -82,20 +82,20 @@ if ( $json )
 $t = "";
 foreach ($performance_data as $key => $value)
 {
-	$v = strtr( $value , ['.','']);
+	$v = strtr( $value , ['.'=>'']);
 	$t .= "'$key'=$v ";
 }
 
 $t = substr($t,0,-1);
 
 print "{$message}|{$t}";
-// print "Current Version\n";
-// print shell_exec( "$wp_cli core version --extra" );
-// print "\n";
-// if ( $vv )
-// {
-// 	print "Available updates\n";
-// 	print "$vv\n";
-// }
+print "\nCurrent Version\n";
+print shell_exec( "$wp_cli core version --extra" );
+print "\n";
+if ( $vv )
+{
+	print "Available updates\n";
+	print "$vv\n";
+}
 exit($exit_code);
 
