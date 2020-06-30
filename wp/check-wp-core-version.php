@@ -30,6 +30,14 @@ $message = "[OK] - This Wordpress has the last core version.";
 $vv = "";
 
 
+$sv = shell_exec("$wp_cli core version");
+$sv_int = strtr($sv, ['.' => '']);
+$performance_data = [
+	'current' => $sv_int,
+	'major' => $sv_int,
+	'minor' => $sv_int
+];
+
 $json = shell_exec("$wp_cli core check-update --format=json" );
 if ( $json )
 {
@@ -46,16 +54,18 @@ if ( $json )
 		foreach ( $versions as $item )
 		{
 			$type = $item['update_type'];
-			$vv .= "$type: {$item['version']}\n";
-
 			switch( $type ){
 				case 'minor':
 					$exit_code = $exit_code < 1 ? 1 : $exit_code;
+					$vv .= "[WARNING] ";
 				break;
 				case 'major':
 					$exit_code = 2;
+					$vv .= "[CRITICAL] ";
 				break;
 			}
+			$performance_data[$type] = strtr($item['version'], ['.' => '']);
+			$vv .= "$type: {$item['version']}\n";
 		}
 
 		if ($exit_code == 2 )
@@ -75,8 +85,14 @@ echo shell_exec( "$wp_cli core version --extra" );
 print "\n";
 if ( $vv )
 {
-	print "To Update\n";
-	print "$vv\n";
+	print "Available updates\n";
+	print "$vv";
 }
+
+echo " | ";
+foreach ( $performance_data as $key => $value )
+	echo "$key=$value ";
+print "\n";
+
 exit($exit_code);
 
