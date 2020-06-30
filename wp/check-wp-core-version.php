@@ -86,13 +86,13 @@ print "\n";
 if ( $vv )
 {
 	print "Available updates\n";
-	print "$vv";
+	print "$vv\n";
 }
 
-$t=" |";
+$t="|";
 foreach ( $performance_data as $key => $value )
-	$t .=" $key=$value";
-print "$t\n";
+	$t.=" $key=$value";
+print "$t";
 
 exit($exit_code);
 
