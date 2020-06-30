@@ -82,8 +82,8 @@ if ( $json )
 $t = "";
 foreach ($performance_data as $key => $value)
 {
-	$v = strtr( $value , ['.'=>'']);
-	$t .= "'$key'=$v ";
+	// $v = strtr( $value , ['.'=>'']);
+	$t .= "'$key'=$value ";
 }
 
 $t = substr($t,0,-1);
