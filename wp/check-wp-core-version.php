@@ -8,11 +8,9 @@ function version_to_float( $v )
 	$r = 0;
 	foreach ( $versions as $version )
 	{
-		$r = $r + ( $version / pow(10,$i) );
-
+		$r = $r + ( $version / pow(10,$i+strlen($version)) );
 		$i++;
 	}
-
 	return $r;
 }
 
