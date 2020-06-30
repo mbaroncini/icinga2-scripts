@@ -79,11 +79,16 @@ if ( $json )
 	}
 }
 
-$t = "|";
+$t = "";
 foreach ($performance_data as $key => $value)
-	$t .= " '$key'=$value";
+{
+	$v = strtr( $value , ['.','']);
+	$t .= "'$key'=$v ";
+}
 
-print "{$message} {$t}\n";
+$t = strpos($t,0,-1);
+
+print "{$message}|{$t}";
 print "Current Version\n";
 print shell_exec( "$wp_cli core version --extra" );
 print "\n";
