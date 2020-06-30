@@ -91,7 +91,7 @@ if ( $vv )
 
 $t="|";
 foreach ( $performance_data as $key => $value )
-	$t.=" $key=$value";
+	$t.=" '$key'=$value";
 print "$t";
 
 exit($exit_code);
