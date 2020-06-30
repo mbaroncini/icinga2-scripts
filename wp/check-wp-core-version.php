@@ -89,13 +89,13 @@ foreach ($performance_data as $key => $value)
 $t = substr($t,0,-1);
 
 print "{$message}|{$t}";
-print "Current Version\n";
-print shell_exec( "$wp_cli core version --extra" );
-print "\n";
-if ( $vv )
-{
-	print "Available updates\n";
-	print "$vv\n";
-}
+// print "Current Version\n";
+// print shell_exec( "$wp_cli core version --extra" );
+// print "\n";
+// if ( $vv )
+// {
+// 	print "Available updates\n";
+// 	print "$vv\n";
+// }
 exit($exit_code);
 
