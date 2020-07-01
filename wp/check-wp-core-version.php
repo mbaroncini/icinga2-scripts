@@ -4,14 +4,14 @@
 function version_to_float( $v )
 {
 	$r = 0;
-	$max = 3;
+	$max = 2;
 	$i = 0;
 	$versions = explode( '.' , $v );
 	foreach( $versions as $version )
 	{
 		if ( $i == 0 )
 			$r = $version . '.';
-		else
+		elseif( $i == 1 )
 		{
 			$zero_n = $max - strlen($version);
 			if ( $zero_n > 0 )
