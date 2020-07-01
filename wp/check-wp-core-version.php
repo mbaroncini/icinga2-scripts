@@ -3,15 +3,24 @@
 
 function version_to_float( $v )
 {
-	$versions = explode('.',$v);
-	$i = 0;
 	$r = 0;
-	foreach ( $versions as $version )
+	$max = 3;
+	$i = 0;
+	$versions = explode( '.' , $v );
+	foreach( $versions as $version )
 	{
-		$r = $r + ( $version / pow(10,$i+strlen($version)) );
+		if ( $i == 0 )
+			$r = $version . '.';
+		else
+		{
+			$zero_n = $max - strlen($version);
+			if ( $zero_n > 0 )
+				$r.=str_repeat('0', $zero_n);
+			$r .= $version;
+		}
 		$i++;
 	}
-	return $r;
+	return (float) $r;
 }
 
 if($argc != 3) {
