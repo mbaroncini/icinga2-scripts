@@ -111,8 +111,7 @@ foreach ($performance_data as $key => $value)
 $t = substr($t,0,-1);
 
 print "{$message}|{$t}";
-print "\nCurrent Version\n";
-print shell_exec( "$wp_cli core version --extra" );
+print "\nCurrent Version: $sv\n";
 print "\n";
 if ( $vv )
 {
