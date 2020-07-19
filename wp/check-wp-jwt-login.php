@@ -41,16 +41,16 @@ $curl_response = shell_exec("curl -sL -X POST -H 'Content-Type: application/json
 
 if ( strlen($curl_response ) < 3 )
 {
-	$message = "[CRITICAL] - Impossible read curl data from $jwt_token_endpoint";
-	$exit_code = 2;
+	$message = "[UNKNOWN] - Impossible read curl data from $jwt_token_endpoint";
+	$exit_code = 3;
 }
 else
 {
 	$curl_arr = explode('|||', $curl_response);
 	if ( !$curl_arr || count( $curl_arr ) != 2 )
 	{
-		$message = "[CRITICAL] - Impossible read curl data from $jwt_token_endpoint";
-		$exit_code = 2;
+		$message = "[UNKNOWN] - Impossible read curl data from $jwt_token_endpoint";
+		$exit_code = 3;
 	}
 	else
 	{
